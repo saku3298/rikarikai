@@ -58,8 +58,16 @@ img { display: block; max-width: 100%; }
   z-index: 0;
 }
 .hero-art img { position: relative; z-index: 1; box-shadow: 0 22px 55px rgba(64, 52, 34, .18); }
-.hero-copy h1 { margin: 8px 0 14px; font-size: clamp(3rem, 7vw, 6.8rem); line-height: 1; letter-spacing: .08em; }
-.catch { margin: 0 0 34px; font-size: clamp(1rem, 2vw, 1.3rem); line-height: 1.9; }
+.hero-copy { min-width: 0; }
+.hero-copy h1 {
+  margin: 8px 0 20px;
+  font-size: clamp(3rem, 5vw, 4.8rem);
+  line-height: 1;
+  letter-spacing: .06em;
+  white-space: nowrap;
+}
+.author { margin: 0 0 34px; color: #756f65; font-size: 1rem; letter-spacing: .08em; }
+.author strong { color: var(--ink); font-size: 1.1rem; letter-spacing: .14em; }
 .read-button {
   display: inline-flex;
   gap: 32px;
@@ -141,7 +149,7 @@ footer { padding: 28px; text-align: center; border-top: 1px solid var(--line); c
   .hero { min-height: auto; grid-template-columns: 1fr; gap: 36px; padding: 46px 24px 64px; }
   .hero-art { width: min(86%, 380px); justify-self: center; }
   .hero-copy { text-align: center; }
-  .hero-copy h1 { font-size: clamp(2.8rem, 17vw, 4.4rem); }
+  .hero-copy h1 { font-size: clamp(2.7rem, 14vw, 4.4rem); }
   .read-button { justify-content: center; width: 100%; }
   .episodes { padding-top: 68px; }
   .episode-card { grid-template-columns: 86px 1fr auto; gap: 16px; }
