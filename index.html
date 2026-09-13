@@ -1,49 +1,12 @@
 <!doctype html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fff9ef">
-  <meta name="description" content="オリジナル漫画『リカリカイ』公式ページ">
-  <title>リカリカイ | 漫画</title>
-  <link rel="stylesheet" href="assets/style.css">
-</head>
-<body class="home">
-  <header class="site-header">
-    <a class="brand" href="index.html">リカリカイ</a>
-    <span class="header-note">ORIGINAL COMIC</span>
-  </header>
-
-  <main>
-    <section class="hero" aria-labelledby="work-title">
-      <div class="hero-art">
-        <img src="pages/page-01.jpg" alt="漫画『リカリカイ』第1話の表紙">
-      </div>
-      <div class="hero-copy">
-        <p class="eyebrow">NEW STORY</p>
-        <h1 id="work-title">リカリカイ</h1>
-        <p class="author">作者 <strong>SAKU</strong></p>
-        <a class="read-button" href="episode1.html">第1話を読む <span aria-hidden="true">→</span></a>
-      </div>
-    </section>
-
-    <section class="episodes" aria-labelledby="episodes-title">
-      <div class="section-heading">
-        <p class="eyebrow">EPISODES</p>
-        <h2 id="episodes-title">話数一覧</h2>
-      </div>
-      <a class="episode-card" href="episode1.html">
-        <img src="pages/page-01.jpg" alt="" loading="lazy">
-        <div>
-          <p class="episode-number">#1</p>
-          <h3>第1話</h3>
-          <p>全24ページ</p>
-        </div>
-        <span class="card-arrow" aria-hidden="true">→</span>
-      </a>
-    </section>
-  </main>
-
-  <footer>© SAKU</footer>
-</body>
-</html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="SAKU制作のオリジナル漫画『リカリカイ』。第1話を公開中。"><title>リカリカイ</title><link rel="stylesheet" href="assets/style.css"></head>
+<body class="top-page"><div class="jp-shell">
+<section class="jp-hero"><img src="pages/page-01.jpg" alt="リカリカイ 第1巻表紙"><div class="jp-hero-right"><div class="jp-logo">リカリカイ</div></div></section>
+<section class="jp-info"><h1 class="jp-title">リカリカイ</h1><div class="jp-author">SAKU</div><div class="jp-actions"><a class="jp-btn primary" href="episode1.html">第1話から読む</a></div></section>
+<nav class="jp-tabs" aria-label="作品メニュー"><button class="jp-tab active" data-tab="episodes">話</button><button class="jp-tab" data-tab="comics">コミックス</button><button class="jp-tab" data-tab="info">作品情報</button></nav>
+<section id="episodes" class="jp-panel active"><div class="range-bar"><button class="range-btn active">1-</button></div><a class="episode-row" href="episode1.html"><img class="episode-thumb" src="pages/page-08.jpg" alt="第1話の場面"><div class="episode-meta"><div class="episode-title">第1話</div></div><div class="episode-read">読む</div></a></section>
+<section id="comics" class="jp-panel"><div class="comics-header"><strong>コミックス</strong><div class="comics-sort"><span class="active">新しい順</span></div></div><div class="volume-list"><a class="volume-tile" href="volume1.html"><img src="pages/page-01.jpg" alt="リカリカイ 第1巻表紙"><div><strong>第1巻</strong><span>第1話を収録</span></div></a></div></section>
+<section id="info" class="jp-panel info-panel"><div class="work-intro"><div class="work-catch">リカリカイ</div><p class="work-summary">SAKUが描くオリジナル漫画。</p><span class="author-chip">作者　SAKU</span></div><div class="info-section"><h2>作者</h2><div class="author-name">SAKU</div></div></section>
+</div><footer>© SAKU / リカリカイ</footer>
+<script>(()=>{const tabs=[...document.querySelectorAll('.jp-tab')],panels=[...document.querySelectorAll('.jp-panel')];function openTab(id,hash=true){if(!panels.some(p=>p.id===id))id='episodes';tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===id));panels.forEach(p=>p.classList.toggle('active',p.id===id));if(hash)history.replaceState(null,'',id==='episodes'?location.pathname:'#'+id)}tabs.forEach(t=>t.addEventListener('click',()=>openTab(t.dataset.tab)));openTab(location.hash.slice(1)||'episodes',false);addEventListener('hashchange',()=>openTab(location.hash.slice(1)||'episodes',false))})();</script></body></html>

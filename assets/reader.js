@@ -1,61 +1,20 @@
 (() => {
-  const firstFilePage = 2;
-  const lastFilePage = 25;
-  const totalPages = lastFilePage - firstFilePage + 1;
-  let current = 1;
-
-  const image = document.getElementById('singlePage');
-  const counter = document.getElementById('pageCounter');
-  const prevButton = document.getElementById('prevButton');
-  const nextButton = document.getElementById('nextButton');
-  const finishLink = document.getElementById('finishLink');
-
-  const fileName = (storyPage) => {
-    const filePage = storyPage + firstFilePage - 1;
-    return `pages/page-${String(filePage).padStart(2, '0')}.jpg`;
-  };
-
-  const showPage = (page) => {
-    current = Math.min(totalPages, Math.max(1, page));
-    image.src = fileName(current);
-    image.alt = `第1話 ${current}ページ目`;
-    counter.textContent = `${current} / ${totalPages}`;
-    prevButton.disabled = current === 1;
-    nextButton.disabled = current === totalPages;
-    document.title = `第1話 ${current}/${totalPages} | リカリカイ`;
-  };
-
-  const scrollPages = document.getElementById('scrollPages');
-  for (let page = 1; page <= totalPages; page += 1) {
-    const img = document.createElement('img');
-    img.src = fileName(page);
-    img.alt = `第1話 ${page}ページ目`;
-    img.loading = page <= 2 ? 'eager' : 'lazy';
-    img.decoding = 'async';
-    scrollPages.appendChild(img);
-  }
-
-  prevButton.addEventListener('click', () => showPage(current - 1));
-  nextButton.addEventListener('click', () => showPage(current + 1));
-  document.getElementById('prevArea').addEventListener('click', () => showPage(current - 1));
-  document.getElementById('nextArea').addEventListener('click', () => showPage(current + 1));
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft') showPage(current - 1);
-    if (event.key === 'ArrowRight' || event.key === ' ') {
-      event.preventDefault();
-      showPage(current + 1);
-    }
-    if (event.key === 'Home') showPage(1);
-    if (event.key === 'End') showPage(totalPages);
-  });
-
-  document.getElementById('fullscreenButton').addEventListener('click', async () => {
-    if (!document.fullscreenElement) await document.documentElement.requestFullscreen();
-    else await document.exitFullscreen();
-  });
-
-  finishLink.addEventListener('click', () => sessionStorage.removeItem('rikarikai-page'));
-  showPage(Number(sessionStorage.getItem('rikarikai-page')) || 1);
-  window.addEventListener('beforeunload', () => sessionStorage.setItem('rikarikai-page', current));
+  const viewer=document.getElementById('viewer'); if(!viewer)return;
+  const originals=[...viewer.querySelectorAll('.manga-page')],counter=document.getElementById('counter'),topBtn=document.getElementById('top'),nextBtn=document.getElementById('prev'),prevBtn=document.getElementById('next'),back=document.getElementById('context-back');
+  const fromComics=new URLSearchParams(location.search).get('from')==='comics'||/volume1\.html/.test(document.referrer||'');
+  if(fromComics){back.href='volume1.html';back.textContent='← 第1巻へ戻る'}
+  let slides=[],index=0,currentPage=0,landscape=false,startX=0,startY=0,dx=0,dragging=false,axis=null,animating=false;
+  const isLandscape=()=>innerWidth>innerHeight;
+  function build(){currentPage=slides[index]?Number(slides[index].dataset.start||0):currentPage;viewer.replaceChildren();slides=[];landscape=isLandscape();if(landscape){for(let i=0;i<originals.length;i+=2){const s=document.createElement('div');s.className='reader-slide spread';s.dataset.start=i;s.append(originals[i]);if(originals[i+1])s.append(originals[i+1]);viewer.append(s);slides.push(s)}index=Math.floor(currentPage/2)}else{originals.forEach((p,i)=>{const s=document.createElement('div');s.className='reader-slide single';s.dataset.start=i;s.append(p);viewer.append(s);slides.push(s)});index=Math.min(currentPage,slides.length-1)}prepare()}
+  function updateCounter(){const start=Number(slides[index]?.dataset.start||0);currentPage=start;counter.textContent=landscape&&start+1<originals.length?`${start+1}-${start+2} / ${originals.length}`:`${start+1} / ${originals.length}`}
+  function fitPortrait(){if(landscape)return;const s=slides[index],img=s?.querySelector('img'),apply=()=>viewer.style.height=`${s.offsetHeight}px`;if(img?.complete)requestAnimationFrame(apply);else img?.addEventListener('load',()=>requestAnimationFrame(apply),{once:true})}
+  function prepare(){slides.forEach((s,i)=>{s.classList.remove('is-active','is-next','is-prev');s.style.transition='none';s.style.transform='translateX(0)';if(i===index)s.classList.add('is-active');else if(i===index+1){s.classList.add('is-next');s.style.transform='translateX(-100%)'}else if(i===index-1){s.classList.add('is-prev');s.style.transform='translateX(100%)'}});viewer.style.height=landscape?'calc(100dvh - 42px)':'auto';fitPortrait();updateCounter()}
+  function animateTo(newIndex,dir){if(animating||newIndex<0||newIndex>=slides.length)return;animating=true;const cur=slides[index],other=slides[newIndex];cur.style.transition=other.style.transition='transform .20s ease';cur.style.transform=dir==='next'?'translateX(100%)':'translateX(-100%)';other.style.transform='translateX(0)';setTimeout(()=>{index=newIndex;animating=false;prepare()},210)}
+  function snap(){const cur=slides[index],n=slides[index+1],p=slides[index-1];[cur,n,p].forEach(s=>{if(s)s.style.transition='transform .15s ease'});if(cur)cur.style.transform='translateX(0)';if(n)n.style.transform='translateX(-100%)';if(p)p.style.transform='translateX(100%)';setTimeout(prepare,160)}
+  viewer.addEventListener('touchstart',e=>{if(animating||e.touches.length!==1)return;const t=e.touches[0];startX=t.clientX;startY=t.clientY;dx=0;dragging=true;axis=null;[slides[index],slides[index+1],slides[index-1]].forEach(s=>{if(s)s.style.transition='none'})},{passive:true});
+  viewer.addEventListener('touchmove',e=>{if(!dragging||e.touches.length!==1)return;const t=e.touches[0],mx=t.clientX-startX,my=t.clientY-startY;if(axis===null){if(Math.abs(mx)<8&&Math.abs(my)<8)return;axis=Math.abs(mx)>Math.abs(my)?'x':'y'}if(axis!=='x')return;e.preventDefault();dx=mx;const cur=slides[index],n=slides[index+1],p=slides[index-1],w=viewer.clientWidth||1;if(dx>0){if(index>=slides.length-1)dx*=.25;cur.style.transform=`translateX(${dx}px)`;if(n)n.style.transform=`translateX(${-w+dx}px)`}else{if(index<=0)dx*=.25;cur.style.transform=`translateX(${dx}px)`;if(p)p.style.transform=`translateX(${w+dx}px)`}},{passive:false});
+  viewer.addEventListener('touchend',()=>{if(!dragging)return;dragging=false;if(axis!=='x'){prepare();return}const threshold=Math.min(90,(viewer.clientWidth||1)*.16);if(dx>threshold&&index<slides.length-1)animateTo(index+1,'next');else if(dx<-threshold&&index>0)animateTo(index-1,'prev');else snap()},{passive:true});
+  let wheelLock=false;viewer.addEventListener('wheel',e=>{if(wheelLock)return;const amount=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;if(Math.abs(amount)<20)return;e.preventDefault();wheelLock=true;if(amount<0)animateTo(index+1,'next');else animateTo(index-1,'prev');setTimeout(()=>wheelLock=false,280)},{passive:false});
+  nextBtn.onclick=()=>animateTo(index+1,'next');prevBtn.onclick=()=>animateTo(index-1,'prev');topBtn.onclick=()=>{currentPage=0;index=0;prepare();scrollTo({top:0,behavior:'smooth'})};document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')animateTo(index+1,'next');if(e.key==='ArrowRight')animateTo(index-1,'prev')});
+  let timer;function rotate(){clearTimeout(timer);timer=setTimeout(()=>isLandscape()!==landscape?build():prepare(),220)}addEventListener('resize',rotate);addEventListener('orientationchange',()=>{setTimeout(rotate,300);setTimeout(rotate,650)});build();
 })();
