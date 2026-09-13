@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17191d">
+  <title>第1話 | リカリカイ</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="reader-page">
+  <header class="reader-header">
+    <a href="index.html" class="back-link">← 作品トップ</a>
+    <div>
+      <strong>リカリカイ</strong>
+      <span>第1話</span>
+    </div>
+    <button id="fullscreenButton" class="icon-button" type="button" aria-label="全画面表示">全画面</button>
+  </header>
+
+  <main class="reader" id="reader">
+    <p class="mobile-guide">下へスクロールしてお読みください</p>
+    <div class="page-stage" aria-live="polite">
+      <button id="prevArea" class="turn-area prev-area" type="button" aria-label="前のページへ"></button>
+      <img id="singlePage" class="single-page" src="pages/page-02.jpg" alt="第1話 1ページ目">
+      <button id="nextArea" class="turn-area next-area" type="button" aria-label="次のページへ"></button>
+    </div>
+
+    <div class="scroll-pages" id="scrollPages"></div>
+
+    <nav class="reader-controls" aria-label="ページ操作">
+      <button id="prevButton" type="button">← 前へ</button>
+      <span id="pageCounter">1 / 24</span>
+      <button id="nextButton" type="button">次へ →</button>
+    </nav>
+    <a class="finish-link" id="finishLink" href="index.html">読み終わる・作品トップへ</a>
+  </main>
+
+  <script src="assets/reader.js"></script>
+</body>
+</html>

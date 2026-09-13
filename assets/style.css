@@ -1,0 +1,160 @@
+:root {
+  --ink: #292721;
+  --paper: #fffdf8;
+  --cream: #fff4d7;
+  --red: #d95d67;
+  --green: #638b72;
+  --line: #e8dfcf;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", system-ui, sans-serif;
+}
+
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+
+.site-header {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(20px, 5vw, 72px);
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 253, 248, .92);
+}
+
+.brand { font-size: 1.35rem; font-weight: 800; letter-spacing: .12em; text-decoration: none; }
+.header-note, .eyebrow { font-size: .72rem; font-weight: 800; letter-spacing: .2em; color: var(--red); }
+
+.hero {
+  min-height: calc(100vh - 68px);
+  display: grid;
+  grid-template-columns: minmax(280px, 520px) minmax(280px, 520px);
+  align-items: center;
+  justify-content: center;
+  gap: clamp(36px, 8vw, 110px);
+  padding: 56px clamp(22px, 6vw, 90px);
+  background:
+    radial-gradient(circle at 78% 20%, rgba(248, 210, 95, .26), transparent 25%),
+    radial-gradient(circle at 12% 80%, rgba(94, 164, 126, .16), transparent 28%),
+    var(--paper);
+}
+
+.hero-art { position: relative; max-width: 440px; justify-self: end; }
+.hero-art::before {
+  content: "";
+  position: absolute;
+  inset: -14px 14px 14px -14px;
+  border: 2px solid var(--red);
+  border-radius: 3px;
+  z-index: 0;
+}
+.hero-art img { position: relative; z-index: 1; box-shadow: 0 22px 55px rgba(64, 52, 34, .18); }
+.hero-copy h1 { margin: 8px 0 14px; font-size: clamp(3rem, 7vw, 6.8rem); line-height: 1; letter-spacing: .08em; }
+.catch { margin: 0 0 34px; font-size: clamp(1rem, 2vw, 1.3rem); line-height: 1.9; }
+.read-button {
+  display: inline-flex;
+  gap: 32px;
+  align-items: center;
+  padding: 17px 25px;
+  background: var(--ink);
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 2px;
+  transition: transform .2s, background .2s;
+}
+.read-button:hover { transform: translateY(-2px); background: var(--red); }
+
+.episodes { max-width: 980px; margin: auto; padding: 90px 24px 110px; }
+.section-heading h2 { margin: 5px 0 30px; font-size: 2rem; }
+.episode-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 130px 1fr auto;
+  gap: 28px;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  background: white;
+  transition: box-shadow .2s, transform .2s;
+}
+.episode-card:hover { transform: translateY(-3px); box-shadow: 0 14px 35px rgba(70, 55, 34, .12); }
+.episode-card img { width: 130px; aspect-ratio: 3 / 4.25; object-fit: cover; object-position: top; }
+.episode-card h3 { margin: 4px 0; font-size: 1.4rem; }
+.episode-card p { margin: 0; color: #756f65; }
+.episode-card .episode-number { color: var(--red); font-size: .78rem; font-weight: 800; letter-spacing: .15em; }
+.card-arrow { padding: 20px; font-size: 1.5rem; }
+footer { padding: 28px; text-align: center; border-top: 1px solid var(--line); color: #817b71; font-size: .78rem; }
+
+/* Reader */
+.reader-page { background: #17191d; color: #f5f5f3; }
+.reader-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: 62px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 20px;
+  background: rgba(20, 22, 26, .94);
+  border-bottom: 1px solid #34373c;
+  backdrop-filter: blur(10px);
+}
+.reader-header > div { display: flex; gap: 14px; align-items: baseline; }
+.reader-header span { color: #a9adb4; font-size: .82rem; }
+.back-link { justify-self: start; text-decoration: none; color: #d7d9dc; font-size: .9rem; }
+.icon-button { justify-self: end; }
+.icon-button, .reader-controls button {
+  border: 1px solid #50545a;
+  background: #292c31;
+  color: white;
+  padding: 9px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.icon-button:hover, .reader-controls button:hover { background: #3b3f46; }
+.reader { min-height: calc(100vh - 62px); padding: 22px 20px 100px; }
+.page-stage { position: relative; width: min(100%, 640px); margin: 0 auto; }
+.single-page { width: auto; max-width: 100%; height: calc(100vh - 155px); margin: auto; object-fit: contain; box-shadow: 0 8px 35px rgba(0,0,0,.45); background: white; }
+.turn-area { position: absolute; top: 0; bottom: 0; z-index: 2; width: 30%; border: 0; background: transparent; cursor: pointer; }
+.prev-area { left: 0; cursor: w-resize; }
+.next-area { right: 0; cursor: e-resize; }
+.reader-controls { position: fixed; z-index: 15; bottom: 18px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 18px; padding: 9px; background: rgba(20,22,26,.92); border-radius: 7px; }
+.reader-controls span { min-width: 72px; text-align: center; font-variant-numeric: tabular-nums; }
+.reader-controls button:disabled { opacity: .35; cursor: default; }
+.scroll-pages, .mobile-guide, .finish-link { display: none; }
+
+@media (max-width: 700px) {
+  .site-header { height: 58px; }
+  .header-note { display: none; }
+  .hero { min-height: auto; grid-template-columns: 1fr; gap: 36px; padding: 46px 24px 64px; }
+  .hero-art { width: min(86%, 380px); justify-self: center; }
+  .hero-copy { text-align: center; }
+  .hero-copy h1 { font-size: clamp(2.8rem, 17vw, 4.4rem); }
+  .read-button { justify-content: center; width: 100%; }
+  .episodes { padding-top: 68px; }
+  .episode-card { grid-template-columns: 86px 1fr auto; gap: 16px; }
+  .episode-card img { width: 86px; }
+  .card-arrow { padding: 6px; }
+
+  .reader-header { height: 56px; grid-template-columns: 1fr auto; padding: 0 13px; }
+  .reader-header > div { justify-self: end; }
+  .reader-header span, .icon-button { display: none; }
+  .reader { padding: 12px 0 58px; }
+  .mobile-guide { display: block; margin: 0 0 12px; text-align: center; color: #aeb1b7; font-size: .76rem; }
+  .page-stage, .reader-controls { display: none; }
+  .scroll-pages { display: block; }
+  .scroll-pages img { width: 100%; height: auto; margin: 0; background: white; }
+  .finish-link { display: block; width: calc(100% - 32px); margin: 30px auto 0; padding: 16px; background: white; color: #222; text-align: center; text-decoration: none; border-radius: 4px; font-weight: 700; }
+}
