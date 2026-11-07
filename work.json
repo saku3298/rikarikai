@@ -33,7 +33,7 @@
       "cover": "ogre-kingdom-cover",
       "cover_alt": "オーガキングダム 第8巻表紙",
       "url": "https://saku3298.github.io/ogre-kingdom/",
-      "new_tab": false
+      "new_tab": true
     },
     {
       "title": "りんごちゃん",
@@ -48,6 +48,7 @@
     "title": "SAKU作品集",
     "url": "https://saku3298.github.io/saku-works/",
     "description": "短編マンガをまとめた作品集",
-    "image": "author-portrait"
+    "image": "author-portrait",
+    "new_tab": true
   }
 }
