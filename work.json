@@ -1,0 +1,24 @@
+{
+  "site": {
+    "name": "リカリカイ",
+    "url": "https://saku3298.github.io/rikarikai/",
+    "description": "SAKU制作のオリジナル漫画『リカリカイ』。第1話を公開中。",
+    "copyright": "© SAKU / リカリカイ"
+  },
+  "work": {
+    "title": "リカリカイ",
+    "author": "SAKU",
+    "summary": "山で狩りをしながら暮らす14歳の少年・理人（りひと）。ある日、謎の精霊と出会ったことで、不思議な戦いに巻き込まれていく。",
+    "author_portrait_alt": "作者SAKUの漫画風自画像"
+  },
+  "episodes": [
+    { "no": 1, "title": "トラックに轢かれてねーから転生しねーよ" }
+  ],
+  "volumes": [
+    { "no": 1, "summary": "第1話を収録", "episodes": [1] }
+  ],
+  "related": [
+    { "title": "オーガキングダム", "author": "YUURI・SAKU", "cover": "ogre-kingdom-cover", "cover_alt": "オーガキングダム 第8巻表紙", "url": "https://saku3298.github.io/ogre-kingdom/", "new_tab": false },
+    { "title": "りんごちゃん", "author": "れ。", "cover": "ringo-chan-cover", "cover_alt": "りんごちゃん 第1巻表紙", "url": "https://saku3298.github.io/ringo-chan/", "new_tab": true }
+  ]
+}
