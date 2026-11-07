@@ -22,3 +22,52 @@
 .nf .nf-code{margin:0;font-size:clamp(72px,22vw,120px);font-weight:900;line-height:1;color:#ddd}
 .nf h1{font-size:24px;margin:10px 0 8px}
 .nf p{color:#777;margin:0 0 26px}
+
+/* ---- 見た目の磨き込み（ジャンププラス風の骨格はそのまま） ---- */
+body{-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid #18aaf5;outline-offset:2px;border-radius:6px}
+@media(min-width:800px){.top-page{background:#f4f4f5}.jp-shell{box-shadow:0 0 0 1px #e8e8ea,0 16px 48px rgba(0,0,0,.07)}}
+/* トップ：ヒーロー */
+.jp-hero{position:relative;border-bottom:4px solid var(--red)}
+.jp-hero-text{display:flex;flex-direction:column;gap:12px}
+.jp-kicker{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800;letter-spacing:.26em;color:rgba(255,255,255,.85);text-shadow:0 1px 6px #000}
+.jp-kicker::before{content:"";flex:none;width:22px;height:3px;border-radius:2px;background:var(--red)}
+.jp-logo{letter-spacing:.06em}
+.jp-title{letter-spacing:.03em}
+.jp-author{margin-bottom:12px}
+.jp-tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.jp-tags span{padding:3px 12px;border-radius:999px;background:#f3f3f4;color:#555;font-size:12px;font-weight:800}
+.jp-btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;box-shadow:0 1px 2px rgba(0,0,0,.06);transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+.jp-btn:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(0,0,0,.14)}
+.jp-btn:active{transform:none;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.jp-btn.primary{box-shadow:0 6px 16px rgba(239,59,53,.32)}
+.jp-btn.primary::before{content:"\25B6";margin-right:.55em;font-size:.7em}
+@media(max-width:600px){.jp-kicker{font-size:10px;letter-spacing:.16em;gap:7px}.jp-kicker::before{width:14px}.jp-hero-text{gap:8px}}
+/* トップ：一覧まわり */
+.jp-tab{transition:color .15s ease}.jp-tab:not(.active):hover{color:var(--red)}
+.episode-row,.volume-tile{transition:background .15s ease}
+.episode-row:hover,.volume-tile:hover{background:#fafafa}
+.episode-thumb{border-radius:6px}
+.episode-read{transition:background .15s ease,color .15s ease}
+.episode-row:hover .episode-read,.volume-tile:hover::after{background:#18aaf5;color:#fff}
+.volume-tile::after{transition:background .15s ease,color .15s ease}
+.volume-tile img{border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.author-work-card{transition:background .15s ease}.author-work-card:hover{background:#fafafa}
+.author-work-card img{border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.14)}
+.info-section h2{font-size:24px;padding-left:12px;border-left:5px solid var(--red);line-height:1.2}
+.work-summary{line-height:1.85}
+.top-page footer{border-top:1px solid #eee;color:#999}
+.top-page footer a{text-decoration:underline;text-underline-offset:3px}
+/* 読書画面：バー・ボタン（バーの高さは変えません） */
+.reader-bar{background:rgba(13,13,15,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.reader-bar .progress{position:absolute;left:0;right:0;bottom:-1px;height:3px;background:rgba(255,255,255,.1);pointer-events:none}
+.reader-bar #progress-fill{position:absolute;top:0;right:0;height:100%;width:0;background:var(--red);transition:width .25s ease}
+@media(prefers-reduced-motion:reduce){.reader-bar #progress-fill{transition:none}}
+.reader-title #context-back{color:#d6d6dc;transition:color .15s ease}.reader-title #context-back:hover{color:#fff}
+.reader-controls .small-btn{border-radius:999px;background:#2a2a2f;border-color:#46464d;padding:2px 13px;transition:background .15s ease}
+.reader-controls .small-btn:hover{background:#38383f}
+.episode-nav .small-btn{border-radius:999px;padding:9px 20px;transition:background .15s ease}.episode-nav .small-btn:hover{background:#2f2f35}
+.page-nav button{min-height:46px;min-width:140px;border-radius:999px;transition:background .15s ease,transform .1s ease}
+.page-nav button:hover{background:#2f2f35}.page-nav button:active{transform:scale(.97)}
+.counter{font-variant-numeric:tabular-nums;letter-spacing:.06em}
+.reader-footer a{text-decoration:underline;text-underline-offset:3px}

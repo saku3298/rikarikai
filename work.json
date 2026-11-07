@@ -12,13 +12,42 @@
     "author_portrait_alt": "作者SAKUの漫画風自画像"
   },
   "episodes": [
-    { "no": 1, "title": "トラックに轢かれてねーから転生しねーよ" }
+    {
+      "no": 1,
+      "title": "トラックに轢かれてねーから転生しねーよ"
+    }
   ],
   "volumes": [
-    { "no": 1, "summary": "第1話を収録", "episodes": [1] }
+    {
+      "no": 1,
+      "summary": "第1話を収録",
+      "episodes": [
+        1
+      ]
+    }
   ],
   "related": [
-    { "title": "オーガキングダム", "author": "YUURI・SAKU", "cover": "ogre-kingdom-cover", "cover_alt": "オーガキングダム 第8巻表紙", "url": "https://saku3298.github.io/ogre-kingdom/", "new_tab": false },
-    { "title": "りんごちゃん", "author": "れ。", "cover": "ringo-chan-cover", "cover_alt": "りんごちゃん 第1巻表紙", "url": "https://saku3298.github.io/ringo-chan/", "new_tab": true }
-  ]
+    {
+      "title": "オーガキングダム",
+      "author": "YUURI・SAKU",
+      "cover": "ogre-kingdom-cover",
+      "cover_alt": "オーガキングダム 第8巻表紙",
+      "url": "https://saku3298.github.io/ogre-kingdom/",
+      "new_tab": false
+    },
+    {
+      "title": "りんごちゃん",
+      "author": "れ。",
+      "cover": "ringo-chan-cover",
+      "cover_alt": "りんごちゃん 第1巻表紙",
+      "url": "https://saku3298.github.io/ringo-chan/",
+      "new_tab": true
+    }
+  ],
+  "site_link": {
+    "title": "SAKU作品集",
+    "url": "https://saku3298.github.io/saku-works/",
+    "description": "短編マンガをまとめた作品集",
+    "image": "author-portrait"
+  }
 }

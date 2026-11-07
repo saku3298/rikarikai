@@ -27,6 +27,7 @@ e = html.escape
 data = json.load(open("work.json", encoding="utf-8"))
 site, work = data["site"], data["work"]
 episodes, volumes, related = data["episodes"], data.get("volumes", []), data.get("related", [])
+site_link = data.get("site_link")
 BASE = site["url"].rstrip("/") + "/"
 TITLE = work["title"]
 
@@ -110,15 +111,22 @@ def index_page():
         f'<img src="{img("images/related/" + r["cover"])}" alt="{e(r["cover_alt"])}">'
         f'<div><div class="author-work-title">{e(r["title"])}</div><div class="author-work-author">作者：{e(r["author"])}</div>'
         f'<span class="author-work-label">コミックス</span></div></a>' for r in related)
-    related_html = f'<div class="info-section"><h2>同じ作者の作品</h2>{cards}</div>' if related else ""
+    if site_link:
+        cards += (f'<a class="author-work-card" href="{e(site_link["url"])}">'
+                  f'<img src="{img("images/work/" + site_link["image"])}" alt="{e(site_link["title"])}">'
+                  f'<div><div class="author-work-title">{e(site_link["title"])}</div>'
+                  f'<div class="author-work-author">{e(site_link["description"])}</div>'
+                  f'<span class="author-work-label">作品集</span></div></a>')
+    related_html = f'<div class="info-section"><h2>同じ作者の作品</h2>{cards}</div>' if (related or site_link) else ""
+    footer_link = f' ｜ <a href="{e(site_link["url"])}" style="text-decoration:underline">{e(site_link["title"])}</a>' if site_link else ""
     return head(TITLE, site["description"], BASE, "website") + f'''<body class="top-page"><div class="jp-shell">
-<section class="jp-hero">{hero_img}<div class="jp-hero-right"><div class="jp-logo">{e(TITLE)}</div></div></section>
-<section class="jp-info"><h1 class="jp-title">{e(TITLE)}</h1><div class="jp-author">{e(work["author"])}</div><div class="jp-actions"><a class="jp-btn primary" href="episode{first["no"]}.html">第{first["no"]}話から読む</a><a class="jp-btn" href="episode{last["no"]}.html">最新話から読む</a></div></section>
+<section class="jp-hero">{hero_img}<div class="jp-hero-right"><div class="jp-hero-text"><div class="jp-kicker">ORIGINAL MANGA</div><div class="jp-logo">{e(TITLE)}</div></div></div></section>
+<section class="jp-info"><h1 class="jp-title">{e(TITLE)}</h1><div class="jp-author">{e(work["author"])}</div><div class="jp-tags"><span>オリジナル漫画</span><span>全{len(episodes)}話公開中</span></div><div class="jp-actions"><a class="jp-btn primary" href="episode{first["no"]}.html">第{first["no"]}話から読む</a><a class="jp-btn" href="episode{last["no"]}.html">最新話から読む</a></div></section>
 <nav class="jp-tabs" aria-label="作品メニュー"><button class="jp-tab active" data-tab="episodes">話</button><button class="jp-tab" data-tab="comics">コミックス</button><button class="jp-tab" data-tab="info">作品情報</button></nav>
 <section id="episodes" class="jp-panel active"><div class="episode-sort-header"><span>全{len(episodes)}話</span><div class="sort-switch episode-sort"><button type="button" class="sort-btn active" data-order="asc">1話から</button><span>|</span><button type="button" class="sort-btn" data-order="desc">最新話から</button></div></div><div class="range-bar"><button class="range-btn active">1-</button></div><div class="episode-list">{rows}</div></section>
 <section id="comics" class="jp-panel"><div class="comics-header"><strong>コミックス</strong><div class="comics-sort"><span class="active">新しい順</span></div></div><div class="volume-list">{tiles}</div></section>
 <section id="info" class="jp-panel info-panel"><div class="work-intro"><div class="work-catch">{e(TITLE)}</div><p class="work-summary">{e(work["summary"])}</p><div class="author-profile"><img src="{img("images/work/author-portrait")}" alt="{e(work["author_portrait_alt"])}"><div><span>作者</span><strong>{e(work["author"])}</strong></div></div></div>{related_html}</section>
-</div><footer>{e(site["copyright"])}</footer>
+</div><footer>{e(site["copyright"])}{footer_link}</footer>
 <script src="js/top.js?v={V_TOP}"></script></body></html>
 '''
 
@@ -142,7 +150,7 @@ def reader_tail(total, footer_links):
 def reader_top(back_href, back_text):
     return (f'<body class="reader-page"><header class="reader-bar"><div class="reader-bar-inner">'
             f'<div class="reader-title"><a id="context-back" href="{back_href}">{back_text}</a></div>'
-            f'<div class="reader-controls"><button class="small-btn" id="top" type="button">先頭へ</button></div></div></header>\n')
+            f'<div class="reader-controls"><button class="small-btn" id="top" type="button">先頭へ</button></div></div><div class="progress" aria-hidden="true"><div id="progress-fill"></div></div></header>\n')
 
 
 def episode_page(ep):
