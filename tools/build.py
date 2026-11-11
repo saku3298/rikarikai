@@ -107,6 +107,7 @@ def index_page():
         for v in sorted(volumes, key=lambda v: -v["no"]))
     tab = ' target="_blank" rel="noopener"'
     cards = "".join(
+        f'<div class="author-work-card is-static"><img src="{img("images/related/" + r["cover"])}" alt="{e(r["cover_alt"])}"><div><div class="author-work-title">{e(r["title"])}</div><div class="author-work-author">作者：{e(r["author"])}</div><span class="author-work-label">{e(r["label"])}</span></div></div>' if not r.get("url") else 
         f'<a class="author-work-card" href="{e(r["url"])}"{tab if r.get("new_tab") else ""}>'
         f'<img src="{img("images/related/" + r["cover"])}" alt="{e(r["cover_alt"])}">'
         f'<div><div class="author-work-title">{e(r["title"])}</div><div class="author-work-author">作者：{e(r["author"])}</div>'

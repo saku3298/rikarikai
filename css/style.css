@@ -71,3 +71,6 @@ body{-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 .page-nav button:hover{background:#2f2f35}.page-nav button:active{transform:scale(.97)}
 .counter{font-variant-numeric:tabular-nums;letter-spacing:.06em}
 .reader-footer a{text-decoration:underline;text-underline-offset:3px}
+
+/* 新作（リンクなし）の紹介カード：ホバー演出なし */
+.author-work-card.is-static{cursor:default}.author-work-card.is-static:hover{background:transparent}.author-work-card.is-static:hover .author-work-title{text-decoration:none}
