@@ -30,27 +30,55 @@
   ],
   "related": [
     {
-      "title": "アペックスキングネス",
+      "title": "SAKU作品集",
       "author": "SAKU",
-      "cover_alt": "アペックスキングネス 第1巻表紙",
-      "cover": "apex-kingness-cover",
-      "label": "連載準備中"
+      "year": "2021年〜",
+      "tags": [
+        "作品集"
+      ],
+      "cover": "saku-works-cover",
+      "cover_alt": "SAKU作品集",
+      "url": "https://saku3298.github.io/saku-works/",
+      "new_tab": true
+    },
+    {
+      "title": "りんごちゃん",
+      "author": "れ。",
+      "year": "2023年〜",
+      "tags": [
+        "話",
+        "コミックス"
+      ],
+      "cover": "ringo-chan-cover",
+      "cover_alt": "りんごちゃん 第1巻表紙",
+      "badge": "休載中",
+      "url": "https://saku3298.github.io/ringo-chan/",
+      "new_tab": true
     },
     {
       "title": "オーガキングダム",
       "author": "YUURI・SAKU",
+      "year": "2025年〜",
+      "tags": [
+        "話",
+        "コミックス"
+      ],
       "cover": "ogre-kingdom-cover",
       "cover_alt": "オーガキングダム 第8巻表紙",
       "url": "https://saku3298.github.io/ogre-kingdom/",
       "new_tab": true
     },
     {
-      "title": "りんごちゃん",
-      "author": "れ。",
-      "cover": "ringo-chan-cover",
-      "cover_alt": "りんごちゃん 第1巻表紙",
-      "url": "https://saku3298.github.io/ringo-chan/",
-      "new_tab": true
+      "title": "アペックスキングネス",
+      "author": "SAKU",
+      "year": "2026年〜",
+      "tags": [
+        "話",
+        "コミックス"
+      ],
+      "cover": "apex-kingness-cover",
+      "cover_alt": "アペックスキングネス 第1巻表紙",
+      "badge": "連載準備中"
     }
   ],
   "site_link": {

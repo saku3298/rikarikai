@@ -143,21 +143,20 @@ def index_page():
         f'<div><strong>第{v["no"]}巻</strong><span>{e(v["summary"])}</span></div></a>'
         for v in sorted(volumes, key=lambda v: -v["no"]))
     tab = ' target="_blank" rel="noopener"'
-    cards = "".join(
-        f'<div class="author-work-card is-static"><img src="{img("images/related/" + r["cover"])}" alt="{e(r["cover_alt"])}"><div><div class="author-work-title">{e(r["title"])}</div><div class="author-work-author">作者：{e(r["author"])}</div><span class="author-work-label">{e(r["label"])}</span></div></div>' if not r.get("url") else 
-        f'<a class="author-work-card" href="{e(r["url"])}"{tab if r.get("new_tab") else ""}>'
-        f'<img src="{img("images/related/" + r["cover"])}" alt="{e(r["cover_alt"])}">'
-        f'<div><div class="author-work-title">{e(r["title"])}</div><div class="author-work-author">作者：{e(r["author"])}</div>'
-        f'<span class="author-work-label">コミックス</span></div></a>' for r in related)
-    if site_link:
-        cards += (f'<a class="author-work-card" href="{e(site_link["url"])}"{tab if site_link.get("new_tab") else ""}>'
-                  f'<img src="{img("images/work/" + site_link["image"])}" alt="{e(site_link["title"])}">'
-                  f'<div><div class="author-work-title">{e(site_link["title"])}</div>'
-                  f'<div class="author-work-author">{e(site_link["description"])}</div>'
-                  f'<span class="author-work-label">作品集</span></div></a>')
+    def rail_card(r):
+        badge = f'<span class="rail-badge">{e(r["badge"])}</span>' if r.get("badge") else ""
+        tags = "".join(f"<span>{e(t)}</span>" for t in r.get("tags", []))
+        year = f'<span class="rail-year">{e(r["year"])}</span>' if r.get("year") else ""
+        author = f'<span class="rail-author">作者：{e(r["author"])}</span>' if r.get("author") and r["author"] != work["author"] else ""
+        inner = (f'<span class="rail-cover"><img loading="lazy" src="{img("images/related/" + r["cover"])}" alt="{e(r["cover_alt"])}">{badge}</span>'
+                 f'<strong class="rail-title">{e(r["title"])}</strong>{year}{author}<span class="rail-tags">{tags}</span>')
+        if r.get("url"):
+            return f'<a class="rail-card" href="{e(r["url"])}"{tab if r.get("new_tab") else ""}>{inner}</a>'
+        return f'<div class="rail-card is-static">{inner}</div>'
+    cards = '<div class="work-rail">' + "".join(rail_card(r) for r in related) + "</div>"
     # 話数の範囲ボタン：50話以下では不要。51話を超えるときは ringo-chan の仕組み（PER_RANGE）に置き換える
     RANGE_BAR = ""
-    related_html = f'<div class="info-section"><h2>同じ作者の作品</h2>{cards}</div>' if (related or site_link) else ""
+    related_html = f'<div class="info-section"><h2>同じ作者の作品</h2>{cards}</div>' if related else ""
     footer_link = f' ｜ <a href="{e(site_link["url"])}" target="_blank" rel="noopener" style="text-decoration:underline">{e(site_link["title"])}</a>' if site_link else ""
     return head(TITLE, site["description"], BASE, "website") + f'''<body class="top-page"><div class="jp-shell">
 <section class="jp-hero">{hero_img}<div class="jp-hero-right"><div class="jp-hero-text">{KICKER_HTML}<div class="jp-logo">{TITLE_HTML}</div>{CATCH_HTML}</div></div></section>
