@@ -2,19 +2,21 @@
   "site": {
     "name": "リカリカイ",
     "url": "https://saku3298.github.io/rikarikai/",
-    "description": "SAKU制作のオリジナル漫画『リカリカイ』。第1話を公開中。",
+    "description": "SAKU制作のオリジナル漫画『リカリカイ』。理解した者だけが生き残る。山で生きる少年と、精霊を狩る戦いの物語。第1話を公開中。",
     "copyright": "© SAKU / リカリカイ"
   },
   "work": {
     "title": "リカリカイ",
     "author": "SAKU",
-    "summary": "山で狩りをしながら暮らす14歳の少年・理人（りひと）。ある日、謎の精霊と出会ったことで、不思議な戦いに巻き込まれていく。",
-    "author_portrait_alt": "作者SAKUの漫画風自画像"
+    "summary": "山に捨てられた14歳の少年・理人（りひと）は、獲物を観察して理解することで山を生き抜いてきた。ある日、水の精霊と出会い、自然そのものである精霊と、それを狩る「戦精」の存在を知る。精霊は理解すれば倒せる。だが理科を理解し続けないと、死の呪いが待っていた。",
+    "author_portrait_alt": "作者SAKUの漫画風自画像",
+    "catch_copy": "理解した者だけが生き残る"
   },
   "episodes": [
     {
       "no": 1,
-      "title": "トラックに轢かれてねーから転生しねーよ"
+      "title": "トラックに轢かれてねーから転生しねーよ",
+      "date": "2026-09-13"
     }
   ],
   "volumes": [
@@ -31,8 +33,8 @@
       "title": "アペックスキングネス",
       "author": "SAKU",
       "cover_alt": "アペックスキングネス 第1巻表紙",
-      "label": "連載準備中",
-      "cover": "apex-kingness-cover"
+      "cover": "apex-kingness-cover",
+      "label": "連載準備中"
     },
     {
       "title": "オーガキングダム",
@@ -57,5 +59,30 @@
     "description": "短編マンガをまとめた作品集",
     "image": "saku-works-cover",
     "new_tab": true
-  }
+  },
+  "characters": [
+    {
+      "name": "理人",
+      "reading": "りひと",
+      "image": "rihito",
+      "role": "主人公",
+      "main": true,
+      "desc": "山に捨てられた14歳。自然を観察し理解して生き抜いてきた。"
+    },
+    {
+      "name": "水の精霊",
+      "image": "water",
+      "desc": "理人が山で出会った精霊。自然そのものの存在。"
+    },
+    {
+      "name": "リカ",
+      "image": "rika",
+      "desc": "実験の戦精。精霊を狩りに来た。"
+    },
+    {
+      "name": "理科の始祖精霊",
+      "image": "kingspirit",
+      "desc": "理科の精霊の始祖。範囲型の強大な存在。"
+    }
+  ]
 }

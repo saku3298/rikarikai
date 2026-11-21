@@ -1,2 +1,8 @@
 /* リカリカイ トップページ（タブ切り替え・話数の並べ替え） */
 (()=>{const tabs=[...document.querySelectorAll('.jp-tab')],panels=[...document.querySelectorAll('.jp-panel')];function openTab(id,hash=true){if(!panels.some(p=>p.id===id))id='episodes';tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===id));panels.forEach(p=>p.classList.toggle('active',p.id===id));if(hash)history.replaceState(null,'',id==='episodes'?location.pathname:'#'+id)}tabs.forEach(t=>t.addEventListener('click',()=>openTab(t.dataset.tab)));openTab(location.hash.slice(1)||'episodes',false);addEventListener('hashchange',()=>openTab(location.hash.slice(1)||'episodes',false));const sortButtons=[...document.querySelectorAll('.episode-sort .sort-btn')],episodeList=document.querySelector('.episode-list');sortButtons.forEach(button=>button.addEventListener('click',()=>{sortButtons.forEach(item=>item.classList.toggle('active',item===button));[...episodeList.querySelectorAll('.episode-row')].sort((a,b)=>button.dataset.order==='desc'?Number(b.dataset.ep)-Number(a.dataset.ep):Number(a.dataset.ep)-Number(b.dataset.ep)).forEach(row=>episodeList.appendChild(row))}))})();
+
+/* 公開から30日以内の話に「新着」を付ける */
+document.querySelectorAll('.episode-date[data-date]').forEach(el=>{
+  const t=new Date(el.dataset.date+'T00:00:00+09:00').getTime();
+  if(Date.now()-t<30*24*3600*1000 && Date.now()>=t-24*3600*1000){const s=document.createElement('span');s.className='new-badge';s.textContent='新着';el.appendChild(s);}
+});
